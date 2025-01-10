@@ -82,6 +82,7 @@ class UrTube:
             if search_word in lower_title:
                 search_list.append(video.title)
         sleep(1)
+        print('Видео добавлено\nСписок видео: ')
         return search_list
 
     def watch_video(self, name):
@@ -112,7 +113,7 @@ class UrTube:
                             break
                 if flag:
                     sleep(1)
-                    print('\nВидео с таким названием не найдено')
+                    print(f'\nВидео с таким названием {name} не найдено')
         return self.videos
 
 
