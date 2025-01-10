@@ -89,20 +89,30 @@ class UrTube:
             sleep(1)
             print('Войдите в аккаунт, чтобы смотреть видео')
         else:
-            for video in self.videos:
-                if name == video.title:
-                    if video.adult_mode and self.current_user.age < 18:
-                        sleep(1)
-                        print('Вам нет 18 лет, пожалуйста покиньте страницу')
-                    else:
-                        sleep(1)
-                        print('\nВоспроизведение видео')
-                        for sec in range(video.duration):
-                            print(video.time_now, end=' ')
-                            video.time_now += 1
+            if self.videos == []:
+                print('Список видео пуст')
+            else:
+                flag = True
+                for video in self.videos:
+                    if name == video.title:
+                        if video.adult_mode and self.current_user.age < 18:
                             sleep(1)
-                        print('\nКонец видео\n')
-                        continue
+                            print('Вам нет 18 лет, пожалуйста покиньте страницу')
+                            flag = False
+                            break
+                        else:
+                            sleep(1)
+                            print('\nВоспроизведение видео')
+                            for sec in range(video.duration):
+                                print(video.time_now, end=' ')
+                                video.time_now += 1
+                                sleep(1)
+                            print('\nКонец видео\n')
+                            flag = False
+                            break
+                if flag:
+                    sleep(1)
+                    print('\nВидео с таким названием не найдено')
         return self.videos
 
 
